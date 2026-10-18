@@ -30,7 +30,7 @@ C. OPEN - needs owner input before launch
   - og:image and canonical need absolute URLs on the final domain (not set - would be invented).
   - Privacy notice in footer is a plain-language placeholder - have it legally reviewed; add Terms if required.
   - Testimonial block is hidden: enable only with a real, written-approved quote.
-  - Confirm every client logo has permission; rename 'CLIENT LOGO X.png' files to kebab-case and ship them and favicon files with the site.
+  - Confirm every client logo has permission; logos are expected at images/clients/client-logo-a.png ... client-logo-u.png (B is .jpg); ship them and the favicon files with the site.
   - Substantiate or soften: 100% compliance, ZERO co-employment risk, 100% IEC compliance, 15+ markets, 25K+ upskilled.
   - Confirm the 'two business days' response promise and NDA availability are operationally true (CONFIG.sla).
   - Netlify: deploy so forms are detected, enable form notifications; add robots.txt, sitemap.xml, 404 page, security headers (_headers), cookie notice if analytics are added.
@@ -887,31 +887,30 @@ C. OPEN - needs owner input before launch
   ];
 
   const clientLogos = [
-	{ src: "images/clients/client-logo-a.png", alt: "IPS e Services" },
-	{ src: "images/clients/client-logo-b.png", alt: "Hamara Kendra" },
-	{ src: "images/clients/client-logo-c.png", alt: "Accenture" },
-	{ src: "images/clients/client-logo-d.png", alt: "BitByBit Solutions" }, 
-	{ src: "images/clients/client-logo-e.png", alt: "Capgemini" },
-	{ src: "images/clients/client-logo-f.png", alt: "CSC-Global" }, 
+    { src: "images/clients/client-logo-a.png", alt: "IPS e Services" },
+    { src: "images/clients/client-logo-b.png", alt: "Hamara Kendra" },
+    { src: "images/clients/client-logo-c.png", alt: "Accenture" },
+    { src: "images/clients/client-logo-d.png", alt: "BitByBit Solutions" },
+    { src: "images/clients/client-logo-e.png", alt: "Capgemini" },
+    { src: "images/clients/client-logo-f.png", alt: "CSC-Global" },
     { src: "images/clients/client-logo-g.png", alt: "National Stock Exchange" },
-    { src: "images/clients/client-logo-h.png", alt: "Publicis Sapient" }, 
-    { src: "images/clients/client-logo-i.png", alt: "Wipro" }, 
-    { src: "images/clients/client-logo-j.png", alt: "Citius Tech" }, 
-    { src: "images/clients/client-logo-k.png", alt: "Aleid Foods" }, 
-    { src: "images/clients/client-logo-l.png", alt: "Burgan One Oil & Gas" }
-    { src: "images/clients/client-logo-m.png", alt: "Best Buy" }, 
+    { src: "images/clients/client-logo-h.png", alt: "Publicis Sapient" },
+    { src: "images/clients/client-logo-i.png", alt: "Wipro" },
+    { src: "images/clients/client-logo-j.png", alt: "Citius Tech" },
+    { src: "images/clients/client-logo-k.png", alt: "Aleid Foods" },
+    { src: "images/clients/client-logo-l.png", alt: "Burgan One Oil & Gas" },
+    { src: "images/clients/client-logo-m.png", alt: "Best Buy" },
     { src: "images/clients/client-logo-n.png", alt: "United Shipping" },
     { src: "images/clients/client-logo-o.png", alt: "Kuwait Oil Tanker Company" },
-    { src: "images/clients/client-logo-p.png", alt: "Deutsche Bank" }, 
+    { src: "images/clients/client-logo-p.png", alt: "Deutsche Bank" },
     { src: "images/clients/client-logo-q.png", alt: "Baker Tilly" },
     { src: "images/clients/client-logo-r.png", alt: "ICF Olson" },
-    { src: "images/clients/client-logo-s.png", alt: "Chevron" }, 
+    { src: "images/clients/client-logo-s.png", alt: "Chevron" },
     { src: "images/clients/client-logo-t.png", alt: "Bank of Montreal Financial Group" },
-    { src: "images/clients/client-logo-u.png", alt: "CenturyLink" }, 
-    { src: "images/clients/client-logo-v.png", alt: "Al Mulla Group" }, 
-    { src: "images/clients/client-logo-w.png", alt: "Dar Al Shifa Hospital" }, 
+    { src: "images/clients/client-logo-u.png", alt: "CenturyLink" },
+    { src: "images/clients/client-logo-v.png", alt: "Al Mulla Group" },
+    { src: "images/clients/client-logo-w.png", alt: "Dar Al Shifa Hospital" },
     { src: "images/clients/client-logo-x.png", alt: "McDonald's" }
-	
   ];
 
   capabilityGrid.innerHTML = capabilityData.map((c, i) => `
@@ -1215,7 +1214,7 @@ C. OPEN - needs owner input before launch
 
   // ---------- 4d: review notes panel (only with ?review=1) ----------
   if (new URLSearchParams(location.search).get('review') === '1') {
-    const NOTES = {"A. Problems on the LIVE site (jex10.netlify.app) that must NOT carry over": ["Headline text extracts as 'Seizeopportunity.Govern' - words are split into spans with no real spaces. Hurts SEO, copy/paste and screen readers. Keep real text nodes with spaces.", "Client marquee exposes every name twice (32 list items) to assistive tech. Keep the duplicate copy aria-hidden (new file already does).", "Footer 'Verticals' links all point to #capabilities - no per-vertical destination. New: each link opens the matching enquiry tab.", "'Corridors' (North America / Europe / Asia-Pacific) is plain text with nothing behind it. Do not claim regions without supporting content.", "Unverifiable absolute claims: 'Tolerance for compromise 0', '100% statutory compliance', 'Zero co-employment risk', anonymous 'Tier-1 European bank' testimonial. Legal and credibility risk - substantiate or soften.", "'Trusted by' over well-known logos with no evidence of permission. New file uses 'Selected client & delivery experience' - confirm written permission for each logo.", "Honeypot label 'Leave this empty:' is visible when CSS fails. New: visually hidden, aria-hidden, tabindex -1.", "No email/phone/address, no registered-entity details, no privacy notice or form consent although personal data is collected (DPDP Act 2023 / GDPR exposure).", "Newsletter form has no consent wording."], "B. Defects found in THIS file (4c) - fixed in 4d": ["CRITICAL: forms only showed a success toast and discarded data (preventDefault + reset). Inputs had no name attributes. Now real Netlify Forms POST with honeypot, validation, error handling and mailto fallback.", "No primary navigation or call-to-action - only 10px side dots. Added header nav (+ mobile menu) and hero CTAs; dots get a larger hit area and are hidden on small screens.", "Heading typo: 'Human Capital, and Global Trade' (duplicated the commodities pillar). Now 'Human Capital & Workforce'. 'Industrial Commodity & Trade' aligned to 'Commodities & Trade'.", "No <main> landmark or skip link - added.", "Capability cards and client logos are injected by JavaScript - empty if JS fails or for crawlers. Added <noscript> fallback for the pillars.", "Contact tabs had no arrow-key support - added (roving tabindex). Theme choice now persists.", "Missing theme-color, twitter title/description, structured data - added (JSON-LD Organization).", "Added: stats strip, assurances (senior principal, NDA, response time), newsletter 'Probity Brief', footer navigation, contact block, privacy notice, hidden testimonial slot."], "C. OPEN - needs owner input before launch": ["Real contact email/phone/address and registered entity details (legal name, jurisdiction, CIN/GST if India): set CONFIG.contactEmail in the script and complete the footer.", "og:image and canonical need absolute URLs on the final domain (not set - would be invented).", "Privacy notice in footer is a plain-language placeholder - have it legally reviewed; add Terms if required.", "Testimonial block is hidden: enable only with a real, written-approved quote.", "Confirm every client logo has permission; rename 'CLIENT LOGO X.png' files to kebab-case and ship them and favicon files with the site.", "Substantiate or soften: 100% compliance, ZERO co-employment risk, 100% IEC compliance, 15+ markets, 25K+ upskilled.", "Confirm the 'two business days' response promise and NDA availability are operationally true (CONFIG.sla).", "Netlify: deploy so forms are detected, enable form notifications; add robots.txt, sitemap.xml, 404 page, security headers (_headers), cookie notice if analytics are added."]};
+    const NOTES = {"A. Problems on the LIVE site (jex10.netlify.app) that must NOT carry over": ["Headline text extracts as 'Seizeopportunity.Govern' - words are split into spans with no real spaces. Hurts SEO, copy/paste and screen readers. Keep real text nodes with spaces.", "Client marquee exposes every name twice (32 list items) to assistive tech. Keep the duplicate copy aria-hidden (new file already does).", "Footer 'Verticals' links all point to #capabilities - no per-vertical destination. New: each link opens the matching enquiry tab.", "'Corridors' (North America / Europe / Asia-Pacific) is plain text with nothing behind it. Do not claim regions without supporting content.", "Unverifiable absolute claims: 'Tolerance for compromise 0', '100% statutory compliance', 'Zero co-employment risk', anonymous 'Tier-1 European bank' testimonial. Legal and credibility risk - substantiate or soften.", "'Trusted by' over well-known logos with no evidence of permission. New file uses 'Selected client & delivery experience' - confirm written permission for each logo.", "Honeypot label 'Leave this empty:' is visible when CSS fails. New: visually hidden, aria-hidden, tabindex -1.", "No email/phone/address, no registered-entity details, no privacy notice or form consent although personal data is collected (DPDP Act 2023 / GDPR exposure).", "Newsletter form has no consent wording."], "B. Defects found in THIS file (4c) - fixed in 4d": ["CRITICAL: forms only showed a success toast and discarded data (preventDefault + reset). Inputs had no name attributes. Now real Netlify Forms POST with honeypot, validation, error handling and mailto fallback.", "No primary navigation or call-to-action - only 10px side dots. Added header nav (+ mobile menu) and hero CTAs; dots get a larger hit area and are hidden on small screens.", "Heading typo: 'Human Capital, and Global Trade' (duplicated the commodities pillar). Now 'Human Capital & Workforce'. 'Industrial Commodity & Trade' aligned to 'Commodities & Trade'.", "No <main> landmark or skip link - added.", "Capability cards and client logos are injected by JavaScript - empty if JS fails or for crawlers. Added <noscript> fallback for the pillars.", "Contact tabs had no arrow-key support - added (roving tabindex). Theme choice now persists.", "Missing theme-color, twitter title/description, structured data - added (JSON-LD Organization).", "Added: stats strip, assurances (senior principal, NDA, response time), newsletter 'Probity Brief', footer navigation, contact block, privacy notice, hidden testimonial slot."], "C. OPEN - needs owner input before launch": ["Real contact email/phone/address and registered entity details (legal name, jurisdiction, CIN/GST if India): set CONFIG.contactEmail in the script and complete the footer.", "og:image and canonical need absolute URLs on the final domain (not set - would be invented).", "Privacy notice in footer is a plain-language placeholder - have it legally reviewed; add Terms if required.", "Testimonial block is hidden: enable only with a real, written-approved quote.", "Confirm every client logo has permission; logos are expected at images/clients/client-logo-a.png ... client-logo-u.png (B is .jpg); ship them and the favicon files with the site.", "Substantiate or soften: 100% compliance, ZERO co-employment risk, 100% IEC compliance, 15+ markets, 25K+ upskilled.", "Confirm the 'two business days' response promise and NDA availability are operationally true (CONFIG.sla).", "Netlify: deploy so forms are detected, enable form notifications; add robots.txt, sitemap.xml, 404 page, security headers (_headers), cookie notice if analytics are added."]};
     const esc = (t) => t.replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
     const panel = document.createElement('aside'); panel.id = 'reviewPanel'; panel.setAttribute('aria-label', 'Review notes');
     panel.innerHTML = '<button type="button" id="reviewClose">Close ✕</button><h2>Review notes</h2><div>Comparison with live https://jex10.netlify.app/</div>' +
@@ -1569,6 +1568,21 @@ btn.addEventListener('click', () => { running = !running; btn.textContent = runn
 replayBtn.addEventListener('click', () => { T = 0; prevTl = 0; running = true; btn.textContent = 'Pause'; kick(); });
 if (reduce){ running = false; document.getElementById('momControls').hidden = true; render(); }
 window.__jexSeek = v => { T = v; prevTl = v; running = false; btn.textContent = 'Play'; render(); };
+})();
+</script>
+<script>
+/* Safety net: runs on its own, so a mistake elsewhere can never leave sections blank or show broken logo icons */
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('active');});}
+  else{var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('active');o.unobserve(en.target);}});},{threshold:0.01});els.forEach(function(e){o.observe(e);});}
+  document.addEventListener('error',function(e){
+    var t=e.target;
+    if(t&&t.tagName==='IMG'&&t.closest&&t.closest('.client-logo-card')){
+      var sp=document.createElement('span');sp.textContent=t.alt||'';sp.style.cssText='font-weight:700;letter-spacing:.06em;font-size:13px;opacity:.85;text-align:center';
+      t.replaceWith(sp);
+    }
+  },true);
 })();
 </script>
 </body>
