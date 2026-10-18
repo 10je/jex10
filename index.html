@@ -314,9 +314,13 @@ C. OPEN - needs owner input before launch
   .client-logo-card { height: 65px; padding: 12px 24px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; transition: border-color .3s ease, box-shadow .3s ease, transform .3s ease; }
   .light-theme .client-logo-card { background: rgba(255,255,255,0.8); border-color: rgba(0,0,0,0.08); }
   .client-logo-card:hover { border-color: rgba(252,89,31,0.4); box-shadow: 0 0 20px rgba(252,89,31,0.25); transform: translateY(-2px); }
-  .client-logo-card img { max-height: 38px; width: auto; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.85; transition: filter .3s ease, opacity .3s ease; }
+  .client-logo-card img { max-height: 38px; max-width: 150px; width: auto; object-fit: contain; filter: grayscale(1); opacity: 0.9; transition: filter .3s ease, opacity .3s ease; }
   .light-theme .client-logo-card img { filter: none; opacity: 0.9; }
   .client-logo-card:hover img { filter: none; opacity: 1; }
+  .client-logo-card, .light-theme .client-logo-card { background: #fff; border-color: rgba(255,255,255,0.25); }
+  .client-logo-card img, .light-theme .client-logo-card img { filter: grayscale(1); opacity: .9; }
+  .client-logo-card:hover img { filter: none; opacity: 1; }
+  .client-logo-card span { color: #2a1245; }
 
   /* SECTION 5: Governance */
   #governanceSection { position: relative; width: 100%; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 120px 6vw; background-color: var(--color-dark-bg); border-top: 1px solid rgba(255,255,255,0.06); }
@@ -488,6 +492,24 @@ C. OPEN - needs owner input before launch
   .section-subheading span { text-align: center; }
   .client-block .carousel-wrapper { margin-top: 0; }
 </style>
+<script>
+(function(){
+  var EXT=['png','jpg','jpeg','webp','svg','PNG','JPG','JPEG'];
+  document.addEventListener('error',function(e){
+    var t=e.target;
+    if(t&&t.tagName==='IMG'&&t.closest&&t.closest('.client-logo-card')){
+      var m=(t.getAttribute('src')||'').match(/^(.*)\.([A-Za-z]+)$/), tried=(t.dataset.tried||'').split(',').filter(Boolean);
+      if(m){
+        tried.push(m[2]);
+        var next=EXT.filter(function(x){return tried.indexOf(x)<0;})[0];
+        if(next){t.dataset.tried=tried.join(',');t.src=m[1]+'.'+next;return;}
+      }
+      var sp=document.createElement('span');sp.textContent=t.alt||t.dataset.name||'';sp.style.cssText='font-weight:700;letter-spacing:.06em;font-size:13px;text-align:center';
+      t.replaceWith(sp);
+    }
+  },true);
+})();
+</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -945,7 +967,7 @@ C. OPEN - needs owner input before launch
   });
 
   // Logo set is rendered twice for the seamless loop; the duplicate copy is hidden from assistive tech
-  const logoCard_ = (l, hidden) => `<div class="client-logo-card"${hidden ? ' aria-hidden="true"' : ' role="listitem"'}><img src="${l.src}" alt="${hidden ? '' : l.alt}" width="120" height="38" loading="lazy" decoding="async"></div>`;
+  const logoCard_ = (l, hidden) => `<div class="client-logo-card"${hidden ? ' aria-hidden="true"' : ' role="listitem"'}><img src="${l.src}" alt="${hidden ? '' : l.alt}" height="38" decoding="async"></div>`;
   carouselTrack.innerHTML = clientLogos.map(l => logoCard_(l, false)).join('') + clientLogos.map(l => logoCard_(l, true)).join('');
 
   // ---------- Canvas sizing (debounced to one per frame) ----------
@@ -1576,13 +1598,7 @@ window.__jexSeek = v => { T = v; prevTl = v; running = false; btn.textContent = 
   var els=document.querySelectorAll('.reveal');
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('active');});}
   else{var o=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('active');o.unobserve(en.target);}});},{threshold:0.01});els.forEach(function(e){o.observe(e);});}
-  document.addEventListener('error',function(e){
-    var t=e.target;
-    if(t&&t.tagName==='IMG'&&t.closest&&t.closest('.client-logo-card')){
-      var sp=document.createElement('span');sp.textContent=t.alt||'';sp.style.cssText='font-weight:700;letter-spacing:.06em;font-size:13px;opacity:.85;text-align:center';
-      t.replaceWith(sp);
-    }
-  },true);
+  window.addEventListener('load',function(){document.querySelectorAll('.client-logo-card img').forEach(function(im){if(im.complete&&im.naturalWidth===0&&!im.dataset.checked){im.dataset.checked='1';var ev=document.createEvent('Event');ev.initEvent('error',false,false);im.dispatchEvent(ev);}});});
 })();
 </script>
 </body>
